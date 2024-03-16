@@ -4,6 +4,11 @@ export ZSH="$HOME/.oh-my-zsh"
 alias branches="git branch -a"
 alias l="ls -a"
 alias ll="ls -alFh"
+alias ard="arduino-cli"
+
+function help() {
+	echo "  tmux \n-------------------\n att | tmux attach <SESSION> \n des | tmux kill-session <SESSION> \n det | tmux detach \n lll | tmux list-sessions \n new | new-session <SESSION>"
+}
 
 function abs() {
 	echo $PWD/$1
@@ -50,11 +55,14 @@ ZSH_THEME_SVN_PROMPT_CLEAN=""
 
 DISABLE_AUTO_TITLE="true"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
+
+# Download Znap, if it's not there yet.
+#[[ -r ~/Repos/znap/znap.zsh ]] ||
+#    git clone --depth 1 -- \
+#        https://github.com/marlonrichert/zsh-snap.git ~/Repos/znap
+
+source ~/Repos/znap/znap.zsh  # Start Znap
+znap source marlonrichert/zsh-autocomplete
 
 source $ZSH/oh-my-zsh.sh
