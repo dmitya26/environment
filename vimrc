@@ -4,6 +4,7 @@ set shiftwidth=4
 set autoindent
 set smartindent
 filetype indent on
+"colorscheme delek, peachpuff, slate, blue
 colorscheme slate
 syntax enable
 filetype on
@@ -13,7 +14,9 @@ set statusline+=\ %F\ %M\ %Y\ %R
 set statusline+=%{\"\\ua0\"}
 set statusline+=\row:\ %l\ col:\ %c
 
-set nu
+"set nu
+"set relativenumber
+set nu rnu
 set hlsearch " `:noh` to terminate the current search
 set cursorline
 set ruler
