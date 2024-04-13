@@ -1,3 +1,15 @@
+"visual configs
+set scrolloff=10
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set smartindent
+filetype indent on
+set cmdheight=1
+set shell=zsh
+"colorschemes delek, peachpuff, slate, blue
+filetype on
+
 set laststatus=2
 set statusline+=\ %F\ %M\ %Y\ %R
 set statusline+=%{\"\\ua0\"}
@@ -10,12 +22,6 @@ set ruler
 
 " autocommands
 autocmd BufWritePre * :%s/\s\+$//e
-
-" general keybinds keybinds
-
-inoremap { {<CR>}<Esc>ko
-"inoremap ( ()<Esc>ha
-"inoremap <expr> ) getline('.')[col('.')-1]==')' ? '<c-g>U<right>' : ')'
 
 inoremap <C-d> <Esc>
 inoremap <C-_> //<space>
@@ -62,10 +68,22 @@ filetype plugin indent on    " required
 syntax enable
 call vundle#begin()
 Plugin 'bfrg/vim-cpp-modern'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'kh3phr3n/python-syntax'
 Plugin 'fatih/vim-go'
+Plugin 'rstacruz/vim-closer'
+Plugin 'tpope/vim-fugitive'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'solyarisoftware/Highlight.vim'
+Plugin 'rust-lang/rust.vim'
 call vundle#end()
 
+set background=dark
+autocmd BufNew,BufRead *.asm set ft=nasm
+
+colorscheme PaperColor
+
+packadd YouCompleteMe
 
 let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
