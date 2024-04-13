@@ -1,37 +1,10 @@
-# Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
-alias branches="git branch -a"
-alias l="ls -a"
 alias ll="ls -alFh"
-alias ard="arduino-cli"
 
-function help() {
-	echo "  tmux \n-------------------\n att | tmux attach <SESSION> \n des | tmux kill-session <SESSION> \n det | tmux detach \n lll | tmux list-sessions \n new | new-session <SESSION>"
-}
+alias help="python3 remember.py" # make your own "remember.py" file to put things you want to remember into
 
 function abs() {
 	echo $PWD/$1
-}
-
-function att() {
-	tmux attach -t $1
-}
-
-function des() {
-	tmux kill-session -t $1
-}
-
-function det() {
-	tmux detach
-}
-
-function lll() {
-	tmux list-sessions
-}
-
-function new() {
-	tmux new-session -t $1
 }
 
 # magenta directory, green git, cyan dollar sign, white text
@@ -64,5 +37,3 @@ plugins=(git)
 
 source ~/Repos/znap/znap.zsh  # Start Znap
 znap source marlonrichert/zsh-autocomplete
-
-source $ZSH/oh-my-zsh.sh
