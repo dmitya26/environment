@@ -1,3 +1,10 @@
+" How to repeat characters.
+" escape
+" number of repeats
+" i (insert)
+" letter
+" escape
+
 "visual configs
 set scrolloff=10
 set tabstop=4
@@ -17,17 +24,13 @@ set statusline+=\row:\ %l\ col:\ %c
 
 set nu rnu
 set hlsearch " `:noh` to terminate the current search
-set cursorline
+"set cursorline
 set ruler
 
 " autocommands
 autocmd BufWritePre * :%s/\s\+$//e
 
-inoremap <C-d> <Esc>
-inoremap <C-_> //<space>
-
 nnoremap F ^
-nnoremap f w
 nnoremap B $
 
 nnoremap <silent> <C-s> :vsplit <CR>
@@ -67,23 +70,17 @@ filetype plugin indent on    " required
 
 syntax enable
 call vundle#begin()
-Plugin 'bfrg/vim-cpp-modern'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'kh3phr3n/python-syntax'
-Plugin 'fatih/vim-go'
-Plugin 'rstacruz/vim-closer'
 Plugin 'tpope/vim-fugitive'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'solyarisoftware/Highlight.vim'
-Plugin 'rust-lang/rust.vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'fatih/vim-go'
+Plugin 'ku1ik/vim-sunburst'
+Plugin 'rstacruz/vim-closer'
 call vundle#end()
 
 set background=dark
 autocmd BufNew,BufRead *.asm set ft=nasm
 
-colorscheme PaperColor
-
-packadd YouCompleteMe
+colorscheme sunburst
 
 let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
