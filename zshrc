@@ -7,8 +7,9 @@ function get_venv {
 }
 
 function get_git {
-	if [ -e .git 2>/dev/null ]; then
-		echo ' ('$(git branch -a | xargs)')'
+	#if [ -e .git 2>/dev/null ]; then
+	if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
+		echo " ($(git symbolic-ref --short HEAD 2>/dev/null))"
 	else
 		echo ''
 	fi
