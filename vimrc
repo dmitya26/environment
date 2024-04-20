@@ -1,10 +1,3 @@
-" How to repeat characters.
-" escape
-" number of repeats
-" i (insert)
-" letter
-" escape
-
 "visual configs
 set scrolloff=10
 set tabstop=4
@@ -14,7 +7,6 @@ set smartindent
 filetype indent on
 set cmdheight=1
 set shell=zsh
-"colorschemes delek, peachpuff, slate, blue
 filetype on
 
 set laststatus=2
@@ -24,15 +16,18 @@ set statusline+=\row:\ %l\ col:\ %c
 
 set nu rnu
 set hlsearch " `:noh` to terminate the current search
-"set cursorline
 set ruler
 
-" autocommands
+" linter
+"autocmd FileType <filetype> setlocal makeprg=<external command>
+autocmd FileType python setlocal makeprg=pylint\ --errors-only
+autocmd BufWritePost *.py, silent make! <afile> | silent redraw!
+autocmd QuickFixCmdPost [^l]* cwindow
+
+" remove whitespace when save
 autocmd BufWritePre * :%s/\s\+$//e
 
-nnoremap F ^
-nnoremap B $
-
+" random thing for vsplit that I almost never use
 nnoremap <silent> <C-s> :vsplit <CR>
 
 set nocompatible              " be iMproved, required
@@ -70,11 +65,11 @@ filetype plugin indent on    " required
 
 syntax enable
 call vundle#begin()
-Plugin 'tpope/vim-fugitive'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'fatih/vim-go'
 Plugin 'ku1ik/vim-sunburst'
 Plugin 'rstacruz/vim-closer'
+Plugin 'coderifous/textobj-word-column.vim'
 call vundle#end()
 
 set background=dark
