@@ -12,6 +12,11 @@ set cmdheight=1
 set shell=zsh
 syntax enable
 
+"finding
+" Note: The ':b' command allows you ot use vim buffer to hotswap files
+set path+=**
+set wildmenu
+
 set laststatus=2
 set statusline+=\ %F\ %M\ %Y\ %R
 set statusline+=%{\"\\ua0\"}
@@ -22,10 +27,10 @@ set hlsearch " `:noh` to terminate the current search
 set ruler
 
 " linter
-autocmd FileType python setlocal makeprg=pylint\ --errors-only
-autocmd FileType javascript setlocal makeprg=jslint\ %
-autocmd BufWritePost *.py, *.js silent make! <afile> | silent redraw!
-autocmd QuickFixCmdPost [^l]* cwindow
+silent! autocmd FileType python setlocal makeprg=ruff\ check
+
+silent! autocmd BufWritePost *.py silent make! <afile> | silent redraw!
+silent! autocmd QuickFixCmdPost [^l]* cwindow
 
 " remove whitespace when save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -37,11 +42,12 @@ nnoremap <silent> <C-s> :vsplit <CR>
 call plug#begin()
 Plug 'fatih/vim-go'
 Plug 'sheerun/vim-polyglot'
-Plug 'ku1ik/vim-sunburst'
+Plug 'rstacruz/vim-closer'
+Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
 set background=dark
-colorscheme sunburst
+colorscheme jellybeans
 
 let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
