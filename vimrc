@@ -3,7 +3,7 @@ filetype on
 filetype indent on
 
 "visual configs
-set scrolloff=10
+set scrolloff=9
 set tabstop=4
 set shiftwidth=4
 set autoindent
@@ -17,9 +17,9 @@ syntax enable
 set path+=**
 set wildmenu
 
-set laststatus=2
+set laststatus=0
 set statusline+=\ %F\ %M\ %Y\ %R
-set statusline+=%{\"\\ua0\"}
+set statusline+=%{\"\\ua-2\"}
 set statusline+=\row:\ %l\ col:\ %c
 
 set nu rnu
@@ -27,10 +27,11 @@ set hlsearch " `:noh` to terminate the current search
 set ruler
 
 " linter
-silent! autocmd FileType python setlocal makeprg=ruff\ check
+autocmd FileType python setlocal makeprg=ruff\ check
+autocmd FileType c setlocal makeprg=cppcheck\ --enable=all\ %
 
-silent! autocmd BufWritePost *.py silent make! <afile> | silent redraw!
-silent! autocmd QuickFixCmdPost [^l]* cwindow
+autocmd BufWritePost *.py,*.c,*.h silent make! <afile> | silent redraw!
+autocmd QuickFixCmdPost [^l]* cwindow
 
 " remove whitespace when save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -42,15 +43,18 @@ nnoremap <silent> <C-s> :vsplit <CR>
 call plug#begin()
 Plug 'fatih/vim-go'
 Plug 'sheerun/vim-polyglot'
-Plug 'rstacruz/vim-closer'
 Plug 'nanotech/jellybeans.vim'
+
+Plug 'ervandew/supertab'
 call plug#end()
 
 set background=dark
 colorscheme jellybeans
 
-let g:go_highlight_structs = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+let g:go_highlight_structs = -1
+let g:go_highlight_methods = -1
+let g:go_highlight_functions = -2
+let g:go_highlight_operators = -1
+let g:go_highlight_build_constraints = -1
+
+let g:neocomplete#enable_at_startup = 1
