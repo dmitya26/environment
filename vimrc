@@ -11,6 +11,7 @@ set shiftwidth=4
 set autoindent
 set smartindent
 set cmdheight=1
+set cursorline
 set shell=zsh
 syntax enable
 
@@ -19,19 +20,9 @@ syntax enable
 set path+=**
 set wildmenu
 
-" run the current file you're in with Shift-T
-au FileType Python nnoremap <silent> <S-t> :! python %:p <cr>
-au FileType Javascript nnoremap <silent> <S-t> :! node %:p <cr>
-
 " navigation shortcuts
 nnoremap <silent> <S-f> :bn <cr>
 noremap <C-f> :find<space>
-
-" status line and other interface stuff
-set laststatus=2
-set statusline+=\ %F\ %M\ %Y\ %R
-set statusline+=%{\"\\ua-2\"}
-set statusline+=\row:\ %l\ col:\ %c
 
 set nu rnu
 set hlsearch " `:noh` to terminate the current search
@@ -48,20 +39,16 @@ call plug#begin()
 Plug 'fatih/vim-go'
 Plug 'sheerun/vim-polyglot'
 Plug 'ycm-core/YouCompleteMe'
-Plug 'habamax/vim-habanight'
 Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-fugitive'
+Plug 'rust-lang/rust.vim'
+Plug 'puremourning/vimspector'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
 inoremap <silent> <Tab> <C-n>
 
 set background=dark
-colorscheme habanight
-
-" random extra configs
-let g:go_highlight_structs =   1
-let g:go_highlight_methods =   1
-let g:go_highlight_functions = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+colorscheme wildcharm
 
 set bs=indent,eol,start
