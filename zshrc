@@ -1,3 +1,5 @@
+alias ls="ls -aF"
+
 function get_venv {
 	if [ $VIRTUAL_ENV ]; then
 		echo ' ('`basename $VIRTUAL_ENV`') '
@@ -27,3 +29,5 @@ function reset_zshrc () {
 chpwd_functions+=(reset_zshrc)
 
 PS1="$(get_venv)%F{026}${USERNAME}@${HOST} $(basename "$PWD")%F{white} $ "
+
+cd . # A lazy solution to why the git branch in the prompt doesn't load automatically on startup.
