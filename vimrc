@@ -21,8 +21,8 @@ set path+=**
 set wildmenu
 
 " navigation shortcuts
-nnoremap <silent> <S-f> :bn <cr>
-noremap <C-f> :find<space>
+nnoremap <S-t> :bn <cr>
+nnoremap  <S-f> :find ~/Desktop<cr>
 
 set nu rnu
 set hlsearch " `:noh` to terminate the current search
@@ -36,19 +36,13 @@ xnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '
 
 " plugins
 call plug#begin()
-Plug 'fatih/vim-go' " Must-have Golang plugin.
-Plug 'sheerun/vim-polyglot' " Syntax highlighting.
-Plug 'ycm-core/YouCompleteMe' " Tab autocomplete.
-Plug 'jiangmiao/auto-pairs' " A shockingly good plugin for pairing parentheses, quotes, etc...
-Plug 'tpope/vim-fugitive' " An amazing git plugin.
-Plug 'rust-lang/rust.vim' " Only for vim files.
-Plug 'puremourning/vimspector' " Multi-language debugger.
-Plug 'vim-airline/vim-airline' " A nice status bar plugin.
-
-Plug 'wincent/command-t', {
-			\ 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
-			\ } " Literally the most incredibly fuzzy finder in the entire history of vim.
-
+Plug 'preservim/tagbar'
+Plug 'ycm-core/YouCompleteMe'
+"Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-fugitive'
+Plug 'puremourning/vimspector'
+Plug 'vim-airline/vim-airline'
+Plug 'fatih/vim-go'
 call plug#end()
 
 inoremap <silent> <Tab> <C-n>
@@ -62,5 +56,5 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let g:CommandTPreferredImplementation='ruby'
 
 nnoremap <M-f> :!echo 'tmux' <CR>
-nnoremap f :CommandT <CR>
-"nnoremap <silent> f :call vimspector#Launch() <CR>
+nnoremap t :TagbarToggle <CR>
+nnoremap ; <C-w>
