@@ -1,4 +1,5 @@
 alias ls="ls -aF"
+
 function f {
 	if [[ "$PWD" = */Desktop/* ]]; then
 		cd $(find . -type d -print | fzf --height ~100%)
@@ -22,14 +23,22 @@ function get_git {
 		echo ''
 	fi
 }
+
 if [[ ! $VIRTUAL_ENV ]]; then
 	alias python="python3"
 fi
+
 function reset_zshrc () {
-	tmux set -qg status-left "$(pwd)"
+	if ! [ -z $TMUX ]; then
+		tmux set -qg status-left "$(pwd)"
+	fi
 	PS1="$(get_venv)%F{026}${USERNAME}@${HOST} $(basename "$PWD")%F{red}$(get_git)%F{white} $ "
 }
+
 chpwd_functions+=(reset_zshrc)
+
 PS1="$(get_venv)%F{026}${USERNAME}@${HOST} $(basename "$PWD")%F{white} $ "
+
 cd . # A lazy solution to why the git branch in the prompt doesn't load automatically on startup.
+
 export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH"
