@@ -47,30 +47,9 @@ nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>; <C-w>
 
 set background=dark
-colorscheme habamax
+colorscheme default 
 
 set bs=indent,eol,start
 
 let g:ycm_gopls_binary_path = expand('$GOPATH/bin/gopls')
 let g:CommandTPreferredImplementation='ruby'
-
-nnoremap <M-f> :!echo 'tmux' <CR>
-filetype indent on
-colorscheme slate
-syntax enable
-filetype on
-
-set laststatus=2
-set statusline+=\ %F\ %M\ %Y\ %R
-set statusline+=%{\"\\ua0\"}
-set statusline+=\row:\ %l\ col:\ %c
-
-set nu
-set hlsearch " `:noh` to terminate the current search
-set cursorline
-set ruler
-
-" autocommands
-" autocmd BufWritePre * :%s/\s\+$//e
-
-" general keybinds keybinds
