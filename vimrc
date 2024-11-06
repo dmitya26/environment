@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let mapleader = ';'
 set nocompatible
 
@@ -8,14 +7,10 @@ filetype indent on
 "visual configs
 set title
 set scrolloff=9
-=======
-" visual configs
->>>>>>> 3a29e3e (initial vimrc)
 set tabstop=4
 set shiftwidth=4
 set autoindent
 set smartindent
-<<<<<<< HEAD
 set cmdheight=1
 set cursorline
 set shell=zsh
@@ -41,7 +36,6 @@ xnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '
 " plugins
 call plug#begin()
 Plug 'ervandew/supertab'
-"Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go'
 Plug 'wincent/command-t'
@@ -53,16 +47,14 @@ nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>; <C-w>
 
 set background=dark
-colorscheme sorbet
+colorscheme habamax
 
 set bs=indent,eol,start
 
 let g:ycm_gopls_binary_path = expand('$GOPATH/bin/gopls')
-let g:vimspector_enable_mappings = 'HUMAN'
 let g:CommandTPreferredImplementation='ruby'
 
 nnoremap <M-f> :!echo 'tmux' <CR>
-=======
 filetype indent on
 colorscheme slate
 syntax enable
@@ -79,20 +71,6 @@ set cursorline
 set ruler
 
 " autocommands
-autocmd BufWritePre * :%s/\s\+$//e
+" autocmd BufWritePre * :%s/\s\+$//e
 
 " general keybinds keybinds
-
-inoremap { {<CR>}<Esc>ko
-inoremap ( ()<Esc>ha
-inoremap <expr> ) getline('.')[col('.')-1]==')' ? '<c-g>U<right>' : ')'
-
-inoremap <C-d> <Esc>
-inoremap <C-_> //<space>
-
-nnoremap F ^
-nnoremap f w
-nnoremap B $
-
-nnoremap <silent> <C-s> :vsplit <CR>
->>>>>>> 3a29e3e (initial vimrc)
