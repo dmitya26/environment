@@ -47,7 +47,7 @@ nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>; <C-w>
 
 set background=dark
-colorscheme default 
+colorscheme sorbet 
 
 set bs=indent,eol,start
 

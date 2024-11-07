@@ -14,15 +14,6 @@ alias lt4="lt -L 4"
 alias lt5="lt -L 5"
 
 alias c="tr -d '\n' | pbcopy"
-function reset_zshrc () {
-    if ! [ -z $TMUX ]; then
-        tmux set -qg status-left "$(pwd)"
-    fi
-    # 026
-    PS1="$(get_venv)%F{026}${USERNAME}@${HOST} $(basename "$PWD")%F{red}$(get_git)%F{WHITE} $ "
-}
-chpwd_functions+=(reset_zshrc)
-
 
 WHITE=$(tput setaf 247)
 ORANGE=$(tput setaf 172)
@@ -30,22 +21,18 @@ YELLOW=$(tput setaf 190)
 BOLD=$(tput bold)
 RESET=$(tput sgr0)
 
-export PS1=$(cat <<EOF
-${BOLD}${ORANGE}\u ${WHITE}at ${ORANGE}\h ${WHITE}in ${YELLOW}\w ${RESET}@ \$(date +'%H:%M:%S %Z')
-$ 
-EOF
-)
+#function reset_zshrc () {
+#    # 026
+#	PS1="${BOLD}${ORANGE}\u ${WHITE}at ${ORANGE}\h ${WHITE}in ${YELLOW}\w ${RESET}$ "
+#}
+#chpwd_functions+=(reset_zshrc)
+
+#PS1="${BOLD}${ORANGE}\u ${WHITE}at ${ORANGE}\h ${WHITE}in ${YELLOW}\w ${RESET}$ "
+#PS1="$BOLD$ORANGE\u \h \w ${RESET} $"
+export PS1="\[$BOLD$ORANGE\]\u \[$WHITE\]in \[$ORANGE\]\h \[$WHITE\]at \[$YELLOW\]\w \[$RESET\]$ "
 
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
 export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/3.0.0/bin:$PATH"
-
-set show-all-if-ambiguous on
-
-cat >> ~/.inputrc <<'EOF'
-"\e[A": history-search-backward
-"\e[B": history-search-forward
-EOF
-
 
 export PATH="~/local/bin:$PATH"
