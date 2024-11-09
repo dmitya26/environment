@@ -39,15 +39,19 @@ Plug 'ervandew/supertab'
 Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go'
 Plug 'wincent/command-t'
+Plug 'preservim/tagbar'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 inoremap <silent> <Tab> <C-n>
 
 nnoremap <leader>t :CommandT<cr>
 nnoremap <leader>; <C-w>
+nnoremap <leader>b :TagbarToggle<cr>
+nnoremap <M-f> :!echo 'tmux' <CR>
 
 set background=dark
-colorscheme sorbet 
+colorscheme wildcharm
 
 set bs=indent,eol,start
 
