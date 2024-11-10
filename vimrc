@@ -1,5 +1,6 @@
 let mapleader = ';'
 set nocompatible
+set noswapfile
 
 filetype on
 filetype indent on
@@ -16,15 +17,24 @@ set cursorline
 set shell=zsh
 syntax enable
 
+"debugger
+function! LLDBDebug()
+	let filename = input("file: ")
+	if !empty(filename)
+		"terminal lldb a:filename 
+		"split
+		execute 'terminal lldb ' . filename
+	else
+		return
+	endif
+endfunction
+
 "finding
 " Note: The ':b' followed by a number command allows you to use vim buffer to hotswap files
 set path+=**
-set wildmenu
-
-" navigation shortcuts
+set wildmenu " navigation shortcuts
 nnoremap <leader>n :bn <cr>
 nnoremap <leader>p :bp <cr>
-"nnoremap  <S-f> :find ~/Desktop<cr> " I no longer use vim find.
 
 set nu rnu
 set hlsearch " `:noh` to terminate the current search
@@ -38,7 +48,6 @@ call plug#begin()
 Plug 'ervandew/supertab'
 Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go'
-Plug 'wincent/command-t'
 Plug 'preservim/tagbar'
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
@@ -46,9 +55,12 @@ call plug#end()
 inoremap <silent> <Tab> <C-n>
 
 nnoremap <leader>t :CommandT<cr>
-nnoremap <leader>; <C-w>
+nnoremap <leader>w <C-w>w
 nnoremap <leader>b :TagbarToggle<cr>
-nnoremap <M-f> :!echo 'tmux' <CR>
+nnoremap <leader>f :find ~/Desktop<cr>
+
+nnoremap <leader>d :call LLDBDebug()<cr>
+tnoremap <leader>d <C-\><C-N>:q!<cr>
 
 set background=dark
 colorscheme wildcharm
@@ -56,4 +68,3 @@ colorscheme wildcharm
 set bs=indent,eol,start
 
 let g:ycm_gopls_binary_path = expand('$GOPATH/bin/gopls')
-let g:CommandTPreferredImplementation='ruby'
