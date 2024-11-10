@@ -21,8 +21,6 @@ syntax enable
 function! LLDBDebug()
 	let filename = input("file: ")
 	if !empty(filename)
-		"terminal lldb a:filename 
-		"split
 		execute 'terminal lldb ' . filename
 	else
 		return
@@ -30,6 +28,24 @@ function! LLDBDebug()
 endfunction
 
 "finding
+function! Finding()
+	echo join(glob('*', 0, 1), ", ")
+
+	let dirname = input("file/dir: ")
+	if !empty(dirname)
+		execute 'find ' . dirname 
+	else
+		return
+	endif
+endfunction
+
+function! HLVisual()
+	normal! gv"xy
+	let @/ = getreg('x')
+	call feedkeys("/\<CR>")
+	set hls
+endfunction
+
 " Note: The ':b' followed by a number command allows you to use vim buffer to hotswap files
 set path+=**
 set wildmenu " navigation shortcuts
@@ -39,9 +55,6 @@ nnoremap <leader>p :bp <cr>
 set nu rnu
 set hlsearch " `:noh` to terminate the current search
 set ruler
-
-" the cursor.
-xnoremap <silent> <cr> "*y:silent! let searchTerm = '\V'.substitute(escape(@*, '\/'), "\n", '\\n', "g") <bar> let @/ = searchTerm <bar> echo '/'.@/ <bar> call histadd("search", searchTerm) <bar> set hls<cr>
 
 " plugins
 call plug#begin()
@@ -54,17 +67,17 @@ call plug#end()
 
 inoremap <silent> <Tab> <C-n>
 
-nnoremap <leader>t :CommandT<cr>
+nnoremap <leader>f :call Finding()<cr>
 nnoremap <leader>w <C-w>w
-nnoremap <leader>b :TagbarToggle<cr>
-nnoremap <leader>f :find ~/Desktop<cr>
+tnoremap <leader>w <C-w>w
+nnoremap <leader>t :TagbarToggle<cr>
 
 nnoremap <leader>d :call LLDBDebug()<cr>
 tnoremap <leader>d <C-\><C-N>:q!<cr>
 
+xnoremap <cr> :call HLVisual()<cr>
+
 set background=dark
-colorscheme wildcharm
+colorscheme zaibatsu
 
 set bs=indent,eol,start
-
-let g:ycm_gopls_binary_path = expand('$GOPATH/bin/gopls')
