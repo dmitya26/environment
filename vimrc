@@ -63,7 +63,7 @@ endfunction
 " Note: The ':b' followed by a number command allows you to use vim buffer to hotswap files
 set path+=**
 set wildmenu " navigation shortcuts
-nnoremap <leader>n :bn <cre
+nnoremap <leader>n :bn <cr>
 nnoremap <leader>p :bp <cr>
 
 set nu rnu
