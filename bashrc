@@ -15,6 +15,8 @@ alias lt5="lt -L 5"
 
 alias c="tr -d '\n' | pbcopy"
 
+ctags -R -f ~/tags ~/
+
 WHITE=$(tput setaf 247)
 ORANGE=$(tput setaf 172)
 YELLOW=$(tput setaf 190)

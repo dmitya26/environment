@@ -16,6 +16,9 @@ set cmdheight=1
 set cursorline
 set shell=zsh
 syntax enable
+set completeopt=menuone,noinsert,noselect
+
+set tags=~/tags
 
 "debugger
 function! LLDBDebug()
@@ -46,10 +49,21 @@ function! HLVisual()
 	set hls
 endfunction
 
+function! Autocomplete()
+	let l:before = getline('.')[col('.')-2]
+	if l:before =~# '\s' " || col('.') == 1
+		return "\<Tab>"
+	elseif pumvisible()
+		return "\<C-n>"
+	else
+		return "\<C-n>"
+	endif
+endfunction
+
 " Note: The ':b' followed by a number command allows you to use vim buffer to hotswap files
 set path+=**
 set wildmenu " navigation shortcuts
-nnoremap <leader>n :bn <cr>
+nnoremap <leader>n :bn <cre
 nnoremap <leader>p :bp <cr>
 
 set nu rnu
@@ -58,14 +72,13 @@ set ruler
 
 " plugins
 call plug#begin()
-Plug 'ervandew/supertab'
 Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go'
 Plug 'preservim/tagbar'
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
-inoremap <silent> <Tab> <C-n>
+inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
 
 nnoremap <leader>f :call Finding()<cr>
 nnoremap <leader>w <C-w>w
@@ -81,3 +94,10 @@ set background=dark
 colorscheme zaibatsu
 
 set bs=indent,eol,start
+
+" 'v' in netrw will open the file in vertical preview.
+let g:netrw_banner=0
+let g:netrw_browser_split=4
+let g:netrw_altv=1
+let g:netrw_lifestyle=3
+let g:netrw_list_hide=netrw_gitignore#Hide()
