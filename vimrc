@@ -17,7 +17,6 @@ set cursorline
 set shell=zsh
 syntax enable
 set completeopt=menuone,noinsert,noselect
-
 set tags=~/tags
 
 "debugger
@@ -42,6 +41,7 @@ function! Finding()
 	endif
 endfunction
 
+" visualblock -> return -> hlsearch everything that was in the visual block.
 function! HLVisual()
 	normal! gv"xy
 	let @/ = getreg('x')
@@ -49,11 +49,12 @@ function! HLVisual()
 	set hls
 endfunction
 
+" tab autocomplete
 function! Autocomplete()
 	let l:before = getline('.')[col('.')-2]
-	if l:before =~# '\s' " || col('.') == 1
+	if l:before =~# '\s' || col('.') == 1
 		return "\<Tab>"
-	elseif pumvisible()
+	elseif pumvisible() 
 		return "\<C-n>"
 	else
 		return "\<C-n>"
@@ -70,38 +71,46 @@ set nu rnu
 set hlsearch " `:noh` to terminate the current search
 set ruler
 
-" plugins
+" Plugins! (I mainly only use plugins for the stuff that's too complicated for
+" me to make myself). 
 call plug#begin()
 Plug 'fatih/vim-go'
 Plug 'preservim/tagbar'
 call plug#end()
 
-
+" Remaps for enclosers.
+inoremap { {<cr><del>}<Esc>ko
 inoremap ( ()<Esc>ha
 inoremap <expr> ) getline('.')[col('.')-1]==')' ? '<c-g>U<right>' : ')'
 
+" Tons of random remaps (mostly with leaderkeys).
 inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
-
 nnoremap <leader>f :call Finding()<cr>
 nnoremap <leader>w <C-w>w
 tnoremap <leader>w <C-w>w
 nnoremap <leader>t :TagbarToggle<cr>
-
 nnoremap <leader>d :call LLDBDebug()<cr>
 tnoremap <leader>d <C-\><C-N>:q!<cr>
-
 xnoremap <cr> :call HLVisual()<cr>
 
+" More graphical configs.
 set background=dark
 colorscheme zaibatsu
 
 set bs=indent,eol,start
 
-hi StatusLine ctermbg=black ctermfg=lightgrey
+hi StatusLine ctermbg=black ctermfg=white
 set laststatus=2
-set statusline+=\ %F\ %M\ %Y\ %R
+set statusline+=\ %F\ %Y
 set statusline+=%{\"\\ua0\"}
 set statusline+=\row:\ %l\ col:\ %c
+set statusline+=%{\"\\ua0\"}
+
+function! GetBranch()
+	return trim(system("git branch | awk '/^* /{print $2}'"))
+endfunction
+
+set statusline+=%{GetBranch()}
 
 " 'v' in netrw will open the file in vertical preview.
 let g:netrw_banner=0
