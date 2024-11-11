@@ -72,11 +72,13 @@ set ruler
 
 " plugins
 call plug#begin()
-Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go'
 Plug 'preservim/tagbar'
-Plug 'jiangmiao/auto-pairs'
 call plug#end()
+
+
+inoremap ( ()<Esc>ha
+inoremap <expr> ) getline('.')[col('.')-1]==')' ? '<c-g>U<right>' : ')'
 
 inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
 
@@ -94,6 +96,12 @@ set background=dark
 colorscheme zaibatsu
 
 set bs=indent,eol,start
+
+hi StatusLine ctermbg=black ctermfg=lightgrey
+set laststatus=2
+set statusline+=\ %F\ %M\ %Y\ %R
+set statusline+=%{\"\\ua0\"}
+set statusline+=\row:\ %l\ col:\ %c
 
 " 'v' in netrw will open the file in vertical preview.
 let g:netrw_banner=0
