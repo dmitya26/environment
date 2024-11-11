@@ -79,9 +79,7 @@ Plug 'preservim/tagbar'
 call plug#end()
 
 " Remaps for enclosers.
-inoremap { {<cr><del>}<Esc>ko
-inoremap ( ()<Esc>ha
-inoremap <expr> ) getline('.')[col('.')-1]==')' ? '<c-g>U<right>' : ')'
+inoremap {<cr> {<cr>}<Esc>O
 
 " Tons of random remaps (mostly with leaderkeys).
 inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
