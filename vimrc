@@ -16,6 +16,7 @@ set cmdheight=1
 set cursorline
 set shell=zsh
 syntax enable
+
 set completeopt=menuone,noinsert,noselect
 set tags=~/tags
 
@@ -42,12 +43,12 @@ function! Finding()
 endfunction
 
 " visualblock -> return -> hlsearch everything that was in the visual block.
-function! HLVisual()
-	normal! gv"xy
-	let @/ = getreg('x')
-	call feedkeys("/\<CR>")
-	set hls
-endfunction
+"function! HLVisual()
+"	normal! gv"xy
+"	let @/ = getreg('x')
+"	call feedkeys("/\<CR>")
+"	set hls
+"endfunction
 
 " tab autocomplete
 function! Autocomplete()
@@ -58,7 +59,7 @@ function! Autocomplete()
 		return "\<C-n>"
 	else
 		return "\<C-n>"
-	endif
+  	endif
 endfunction
 
 " Note: The ':b' followed by a number command allows you to use vim buffer to hotswap files
@@ -89,7 +90,7 @@ tnoremap <leader>w <C-w>w
 nnoremap <leader>t :TagbarToggle<cr>
 nnoremap <leader>d :call LLDBDebug()<cr>
 tnoremap <leader>d <C-\><C-N>:q!<cr>
-xnoremap <cr> :call HLVisual()<cr>
+"xnoremap <cr> :call HLVisual()<cr>
 
 " More graphical configs.
 set background=dark
@@ -97,18 +98,13 @@ colorscheme zaibatsu
 
 set bs=indent,eol,start
 
+" stautsline
 hi StatusLine ctermbg=black ctermfg=white
 set laststatus=2
 set statusline+=\ %F\ %Y
 set statusline+=%{\"\\ua0\"}
 set statusline+=\row:\ %l\ col:\ %c
 set statusline+=%{\"\\ua0\"}
-
-function! GetBranch()
-	return trim(system("git branch | awk '/^* /{print $2}'"))
-endfunction
-
-set statusline+=%{GetBranch()}
 
 " 'v' in netrw will open the file in vertical preview.
 let g:netrw_banner=0
