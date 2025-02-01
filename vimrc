@@ -21,10 +21,10 @@ set completeopt=menuone,noinsert,noselect
 set tags=~/tags
 
 "debugger
-function! LLDBDebug()
+function! GDebug()
 	let filename = input("file: ")
 	if !empty(filename)
-		execute 'terminal lldb ' . filename
+		execute 'terminal gdb ' . filename
 	else
 		return
 	endif
@@ -42,13 +42,12 @@ function! Finding()
 	endif
 endfunction
 
-" visualblock -> return -> hlsearch everything that was in the visual block.
-"function! HLVisual()
-"	normal! gv"xy
-"	let @/ = getreg('x')
-"	call feedkeys("/\<CR>")
-"	set hls
-"endfunction
+function! HLVisual()
+	normal! gv"xy
+	let @/ = getreg('x')
+	call feedkeys("/\<CR>")
+	set hls
+endfunction
 
 " tab autocomplete
 function! Autocomplete()
@@ -76,7 +75,7 @@ set ruler
 " me to make myself). 
 call plug#begin()
 Plug 'fatih/vim-go'
-Plug 'preservim/tagbar'
+Plug 'habamax/vim-habanight'
 call plug#end()
 
 " Remaps for enclosers.
@@ -88,13 +87,13 @@ nnoremap <leader>f :call Finding()<cr>
 nnoremap <leader>w <C-w>w
 tnoremap <leader>w <C-w>w
 nnoremap <leader>t :TagbarToggle<cr>
-nnoremap <leader>d :call LLDBDebug()<cr>
+nnoremap <leader>d :call GDebug()<cr>
 tnoremap <leader>d <C-\><C-N>:q!<cr>
-"xnoremap <cr> :call HLVisual()<cr>
+xnoremap <cr> :call HLVisual()<cr>
 
 " More graphical configs.
 set background=dark
-colorscheme zaibatsu
+colorscheme habanight
 
 set bs=indent,eol,start
 
@@ -105,10 +104,3 @@ set statusline+=\ %F\ %Y
 set statusline+=%{\"\\ua0\"}
 set statusline+=\row:\ %l\ col:\ %c
 set statusline+=%{\"\\ua0\"}
-
-" 'v' in netrw will open the file in vertical preview.
-let g:netrw_banner=0
-let g:netrw_browser_split=4
-let g:netrw_altv=1
-let g:netrw_lifestyle=3
-let g:netrw_list_hide=netrw_gitignore#Hide()
