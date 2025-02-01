@@ -86,7 +86,6 @@ inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
 nnoremap <leader>f :call Finding()<cr>
 nnoremap <leader>w <C-w>w
 tnoremap <leader>w <C-w>w
-nnoremap <leader>t :TagbarToggle<cr>
 nnoremap <leader>d :call GDebug()<cr>
 tnoremap <leader>d <C-\><C-N>:q!<cr>
 xnoremap <cr> :call HLVisual()<cr>
