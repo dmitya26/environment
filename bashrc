@@ -25,5 +25,4 @@ RESET=$(tput sgr0)
 
 export PS1="\[$BOLD$ORANGE\]\u \[$WHITE\]in \[$ORANGE\]\h \[$WHITE\]at \[$YELLOW\]\w \[$RESET\]$ "
 
-export PATH="~/local/bin:$PATH"
 export KITTY_CONFIG_DIRECTORY="/home/dmitri/.config/kitty"
