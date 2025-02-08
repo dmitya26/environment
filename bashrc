@@ -4,7 +4,6 @@ alias vi="vim"
 alias ..="cd .."
 alias ...="cd ../.."
 
-alias viconf="vi ~/config"
 alias ..="cd .."
 alias ...="cd ../.."
 
