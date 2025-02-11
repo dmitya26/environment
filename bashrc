@@ -1,4 +1,5 @@
 # Control-R searches bash history
+who | awk '{printf "Logged in as %-5s at %s %s on %s %s\n", $1, $3, $4, $2, $5}'
 
 alias vi="vim"
 alias ..="cd .."
@@ -21,6 +22,11 @@ ORANGE=$(tput setaf 172)
 YELLOW=$(tput setaf 190)
 BOLD=$(tput bold)
 RESET=$(tput sgr0)
+
+justify_right() {
+	local spaces = $(($(tput cols) - ${#text} - 1))
+	printf "%${spaces}s%s" "" "$1"
+}
 
 export PS1="\[$BOLD$ORANGE\]\u \[$WHITE\]in \[$ORANGE\]\h \[$WHITE\]at \[$YELLOW\]\w \[$RESET\]$ "
 

@@ -62,9 +62,11 @@ inoremap {<cr> {<cr>}<Esc>O
 "inoremap <silent> <Tab> <C-n>
 xnoremap <cr> :call HLVisual()<cr>
 inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
+nnoremap <leader>f :CommandT <cr>
 
 " More graphical configs.
 colorscheme sorbet
+hi normal ctermbg=black
 set background=dark
 
 set bs=indent,eol,start
