@@ -4,6 +4,7 @@ set noswapfile
 
 filetype on
 filetype indent on
+filetype plugin on
 
 "visual configs
 set title
@@ -16,8 +17,8 @@ set cmdheight=1
 set cursorline
 syntax enable
 
+set tags=~/tags
 set completeopt=menuone,noinsert,noselect
-
 " tab autocomplete
 function! Autocomplete()
 	let l:before = getline('.')[col('.')-2]
@@ -26,8 +27,8 @@ function! Autocomplete()
 	elseif pumvisible()
 		return "\<C-n>"
 	else
-		return "\<C-n>"
-  	endif
+		return "\<C-x>\<C-]>"
+ 	endif
 endfunction
 
 function! HLVisual()
@@ -47,22 +48,20 @@ set nu rnu
 set hlsearch " `:noh` to terminate the current search
 set incsearch
 set ruler
-	
+
 " Plugins! (I mainly only use plugins for the stuff that's too complicated for
-" me to make myself). 
+" me to make myself).
 call plug#begin()
 Plug 'fatih/vim-go'
-Plug 'wincent/command-t'
 call plug#end()
-		
+
 " Remaps for enclosers.
 inoremap {<cr> {<cr>}<Esc>O
 
 " Tons of random remaps (mostly with leaderkeys).
-"inoremap <silent> <Tab> <C-n>
 xnoremap <cr> :call HLVisual()<cr>
 inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
-nnoremap <leader>f :CommandT <cr>
+nnoremap <leader>f :find<space>
 
 " More graphical configs.
 colorscheme sorbet
@@ -70,6 +69,8 @@ hi normal ctermbg=black
 set background=dark
 
 set bs=indent,eol,start
+
+autocmd BufWritePre * if &filetype != 'markdown' | %s/\s\+$//e | endif
 
 " stautsline
 hi StatusLine ctermbg=black ctermfg=white

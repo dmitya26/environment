@@ -23,11 +23,8 @@ YELLOW=$(tput setaf 190)
 BOLD=$(tput bold)
 RESET=$(tput sgr0)
 
-justify_right() {
-	local spaces = $(($(tput cols) - ${#text} - 1))
-	printf "%${spaces}s%s" "" "$1"
-}
-
 export PS1="\[$BOLD$ORANGE\]\u \[$WHITE\]in \[$ORANGE\]\h \[$WHITE\]at \[$YELLOW\]\w \[$RESET\]$ "
 
 export KITTY_CONFIG_DIRECTORY="/home/dmitri/.config/kitty"
+
+ctags -f "/home/dmitri/tags" --recurse=yes --exclude=local --exclude=go/* --exclude=.git --exclude=.* --exclude=build
