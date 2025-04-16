@@ -1,3 +1,5 @@
+" '.' will repeat the last change made.
+
 let mapleader = ';'
 set nocompatible
 set noswapfile
@@ -19,6 +21,7 @@ syntax enable
 
 set tags=~/tags
 set completeopt=menuone,noinsert,noselect
+set complete=.,t
 " tab autocomplete
 function! Autocomplete()
 	let l:before = getline('.')[col('.')-2]
@@ -27,7 +30,7 @@ function! Autocomplete()
 	elseif pumvisible()
 		return "\<C-n>"
 	else
-		return "\<C-x>\<C-]>"
+		return "\<C-n>"
  	endif
 endfunction
 
@@ -53,6 +56,7 @@ set ruler
 " me to make myself).
 call plug#begin()
 Plug 'fatih/vim-go'
+Plug 'preservim/tagbar'
 call plug#end()
 
 " Remaps for enclosers.
@@ -62,9 +66,11 @@ inoremap {<cr> {<cr>}<Esc>O
 xnoremap <cr> :call HLVisual()<cr>
 inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
 nnoremap <leader>f :find<space>
+nnoremap <leader>t :TagbarToggle<cr>
+nnoremap <leader>w <C-w>
 
 " More graphical configs.
-colorscheme sorbet
+colorscheme torte
 hi normal ctermbg=black
 set background=dark
 

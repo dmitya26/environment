@@ -27,4 +27,9 @@ export PS1="\[$BOLD$ORANGE\]\u \[$WHITE\]in \[$ORANGE\]\h \[$WHITE\]at \[$YELLOW
 
 export KITTY_CONFIG_DIRECTORY="/home/dmitri/.config/kitty"
 
-ctags -f "/home/dmitri/tags" --recurse=yes --exclude=local --exclude=go/* --exclude=.git --exclude=.* --exclude=build
+ctags -f "/home/dmitri/tags" --recurse=yes --exclude=local --exclude=go/* --exclude=.git --exclude=.* --exclude=*.rst --exclude=*.md --exclude=*.txt --exclude=.venv --exclude=venv --exclude=build --exclude=bin
+
+export EDITOR="/usr/bin/vim"
+
+# Created by `pipx` on 2025-03-27 06:20:31
+# export PATH="$PATH:/home/dmitri/.local/bin"
