@@ -1,5 +1,3 @@
-" '.' will repeat the last change made.
-
 let mapleader = ';'
 set nocompatible
 set noswapfile
@@ -8,7 +6,6 @@ filetype on
 filetype indent on
 filetype plugin on
 
-"visual configs
 set title
 set scrolloff=9
 set tabstop=4
@@ -21,8 +18,8 @@ syntax enable
 
 set tags=~/tags
 set completeopt=menuone,noinsert,noselect
-set complete=.,t
-" tab autocomplete
+set complete=.,b,t
+
 function! Autocomplete()
 	let l:before = getline('.')[col('.')-2]
 	if l:before =~# '\s' || col('.') == 1
@@ -41,14 +38,27 @@ function! HLVisual()
 	set hls
 endfunction
 
-" Note: The ':b' followed by a number command allows you to use vim buffer to hotswap files
+function! Comment()
+	let l:filetype = &filetype
+
+	if l:filetype == 'python'
+		'<,'>s/^/# /
+ 	elseif l:filetype == 'asm'
+ 		'<,'>s/^/; /
+ 	elseif l:filetype == 'vim'
+		'<,'>s/^/" /
+	else
+		'<,'>s/^/\/\/ /
+	endif
+endfunction
+
 set path+=**
-set wildmenu " navigation shortcuts
+set wildmenu
 nnoremap <leader>n :bn <cr>
 nnoremap <leader>p :bp <cr>
 
 set nu rnu
-set hlsearch " `:noh` to terminate the current search
+set hlsearch
 set incsearch
 set ruler
 
@@ -59,17 +69,16 @@ Plug 'fatih/vim-go'
 Plug 'preservim/tagbar'
 call plug#end()
 
-" Remaps for enclosers.
 inoremap {<cr> {<cr>}<Esc>O
 
-" Tons of random remaps (mostly with leaderkeys).
 xnoremap <cr> :call HLVisual()<cr>
 inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
 nnoremap <leader>f :find<space>
 nnoremap <leader>t :TagbarToggle<cr>
 nnoremap <leader>w <C-w>
+vnoremap <leader>b :<C-u>call Comment()<CR>
+vnoremap <leader>d <C-]>
 
-" More graphical configs.
 colorscheme torte
 hi normal ctermbg=black
 set background=dark
@@ -78,7 +87,6 @@ set bs=indent,eol,start
 
 autocmd BufWritePre * if &filetype != 'markdown' | %s/\s\+$//e | endif
 
-" stautsline
 hi StatusLine ctermbg=black ctermfg=white
 set laststatus=2
 set statusline+=\ %F\ %Y
