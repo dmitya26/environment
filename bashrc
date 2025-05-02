@@ -29,4 +29,3 @@ export KITTY_CONFIG_DIRECTORY="/home/dmitri/.config/kitty"
 export EDITOR="/usr/bin/vim"
 
 ctags -f "/home/dmitri/tags" --recurse=yes --exclude=local --exclude=go/* --exclude=.git --exclude=.* --exclude=*.rst --exclude=*.md --exclude=*.txt --exclude=.venv --exclude=venv --exclude=build --exclude=bin
-

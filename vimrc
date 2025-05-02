@@ -1,3 +1,5 @@
+" Note: **/**/gc will make me have to approve every search and replace.
+"
 let mapleader = ';'
 set nocompatible
 set noswapfile
@@ -19,17 +21,6 @@ syntax enable
 set tags=~/tags
 set completeopt=menuone,noinsert,noselect
 set complete=.,b,t
-
-function! Autocomplete()
-	let l:before = getline('.')[col('.')-2]
-	if l:before =~# '\s' || col('.') == 1
-		return "\<Tab>"
-	elseif pumvisible()
-		return "\<C-n>"
-	else
-		return "\<C-n>"
- 	endif
-endfunction
 
 function! HLVisual()
 	normal! gv"xy
@@ -67,13 +58,12 @@ set ruler
 call plug#begin()
 Plug 'fatih/vim-go'
 Plug 'preservim/tagbar'
+Plug 'girishji/vimcomplete'
 call plug#end()
 
 inoremap {<cr> {<cr>}<Esc>O
 
 xnoremap <cr> :call HLVisual()<cr>
-inoremap <silent> <Tab> <C-R>=Autocomplete() <cr>
-nnoremap <leader>f :find<space>
 nnoremap <leader>t :TagbarToggle<cr>
 nnoremap <leader>w <C-w>
 vnoremap <leader>b :<C-u>call Comment()<CR>
