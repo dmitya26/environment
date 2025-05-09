@@ -1,13 +1,8 @@
 # Control-R searches bash history
 who | awk '{printf "Logged in as %-5s at %s %s on %s %s\n", $1, $3, $4, $2, $5}'
 
-fd() {
- 	find $1 -type f -exec stat --format='%n, %A, %U, %s bytes' {} \;
-}
-
 alias vi="vim"
-alias ..="cd .."
-alias ...="cd ../.."
+alias g="git"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ll="ls -halF"

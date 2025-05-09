@@ -1,6 +1,10 @@
-" Note: **/**/gc will make me have to approve every search and replace.
-"
+" **/**/gc will make me have to approve every search and replace.
+" Shift-3 highlights all instances of the character the cursor is
+" over.
+" Ctrl-] will find all instances of a thing in tags and add it to args.
+
 let mapleader = ';'
+
 set nocompatible
 set noswapfile
 
@@ -16,18 +20,12 @@ set autoindent
 set smartindent
 set cmdheight=1
 set cursorline
+
 syntax enable
 
 set tags=~/tags
 set completeopt=menuone,noinsert,noselect
-set complete=.,b,t
-
-function! HLVisual()
-	normal! gv"xy
-	let @/ = getreg('x')
-	call feedkeys("/\<CR>")
-	set hls
-endfunction
+set complete=.,b,t,u,i
 
 function! Comment()
 	let l:filetype = &filetype
@@ -45,9 +43,6 @@ endfunction
 
 set path+=**
 set wildmenu
-nnoremap <leader>n :bn <cr>
-nnoremap <leader>p :bp <cr>
-
 set nu rnu
 set hlsearch
 set incsearch
@@ -63,13 +58,19 @@ call plug#end()
 
 inoremap {<cr> {<cr>}<Esc>O
 
-xnoremap <cr> :call HLVisual()<cr>
+let g:vimcomplete_tab_enable = 1
+
+inoremap <buffer><expr> <tab>   g:VimCompleteTab() ?? "{rhs}"
+inoremap <buffer><expr> <s-tab> g:VimCompleteSTab() ?? "{rhs}"
 nnoremap <leader>t :TagbarToggle<cr>
 nnoremap <leader>w <C-w>
 vnoremap <leader>b :<C-u>call Comment()<CR>
-vnoremap <leader>d <C-]>
 
-colorscheme torte
+nnoremap <leader>n :cnext<cr>
+nnoremap <leader>p :cprev<cr>
+nnoremap <leader>c :cclose<cr>
+
+colorscheme zaibatsu
 hi normal ctermbg=black
 set background=dark
 
